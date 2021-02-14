@@ -1,0 +1,68 @@
+type Query {
+    # Returns a single user based on their id.
+    getUserById(id: Int!): User
+
+    # Returns users based on their name.
+    getUsersByName(name: String!): [User]!
+
+    # Returns a single app based on their id.
+    getAppById(id: Int!): App
+
+    # Returns apps based on their name.
+    searchApps(search: String!): [App]!
+
+    # Creates a user appends it to the data and returns it.
+    createUser(name: String!): User
+
+    # Creates an app appends it to the data and returns it.
+    createApp(name: String!, url: String!, author: Int!, description: String): App
+
+    # Returns all users.
+    users: [User]!
+
+    # Returns all apps.
+    apps: [App]!
+}
+
+type User {
+    # The user's id
+    id: Int!
+
+    # The user's name
+    name(name: String): String!
+
+    # Delete the user
+    delete: String
+
+    # The apps the user has published.
+    apps: [App]!
+}
+
+type App {
+    # The app's name
+    name(name: String): String!
+
+    # The app's id
+    id: Int!
+
+    # The app's description
+    description(description: String): String
+
+    # The app's version
+    version(version: Version): Version!
+
+    # The app's url
+    url(url: URL): URL!
+
+    # Delete the user
+    delete: String
+
+    # The author's id
+    author: Int!
+}
+
+# A field whose value matches the provided regular expression /^v\d+\.\d+\.\d+$/.
+scalar Version
+
+# A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt.
+scalar URL
